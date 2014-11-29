@@ -1,0 +1,77 @@
+Introduction
+------------
+
+This benchmark implements Ruppert's algorithm for Delaunay mesh refinement [3].
+The transactional version is similar in design to the one presented in [2].
+
+When using this benchmark, please cite [1].
+
+
+Compiling and Running
+---------------------
+
+To build the application, simply run:
+
+    make -f <makefile>
+
+in the source directory. For example, for the sequential flavor, run:
+
+    make -f Makefile.seq
+
+By default, this produces an executable named "yada", which can then be
+run in the following manner:
+
+    ./yada -a <angle_constraint> \
+           -i <file_prefix> \
+           -t <number_of_threads>
+
+Where <file_prefix> is the prefix of a set of three files which contain the
+vertices of the input mesh, the triangles in the input mesh, and the boundary of
+the input mesh, with suffixes ".node", ".ele", and ".poly", respectively.
+
+The default <number_of_threads> is 1 and the default <angle_constraint>
+is 20 degrees. In practice, Ruppert's algorithm can easily achieve an
+angle constraing of about 20 degrees, but it rarely improves it much beyond
+30 degrees.
+
+
+Input Files
+-----------
+
+There are six different input files in "inputs". From smallest to largest,
+these are spiral, dots, ladder, 633, ttimeu10000, and ttimeu10000. All input
+files are courtesy of Jonathan Shewchuck.
+
+To produce additional inputs, you can use the program, Triangle [4]:
+
+    ./triangle a
+    ./triangle -c a.1
+
+This will generate the files "a.2.node", "a.2.ele", and "a.2.poly", which
+can then be used as inputs for this benchmark.
+
+For simulated runs, use:
+
+    -a20 -i inputs/633.2
+
+And for non-simulator runs, use:
+
+    -a15 -i inputs/ttimeu1000000.2
+
+
+References
+----------
+
+[1] C. Cao Minh, J. Chung, C. Kozyrakis, and K. Olukotun. STAMP: Stanford 
+    Transactional Applications for Multi-processing. In IISWC '08: Proceedings
+    of The IEEE International Symposium on Workload Characterization,
+    September 2008. 
+
+[2] M. Kulkarni, L. Paul Chew, and K. Pingail. Using Transactions in Delaunay
+    Mesh Generation. Workshop on Transactional Memory Workloads, 2006.
+
+[3] J. Ruppert. A Delaunay Refinement Algorithm for Quality 2-Dimensional
+    Mesh Generation. J. Algorithms 18, 3 (May. 1995), 548-585.
+
+[4] J. R. Shewchuck. Triangle: A Two-Dimensional Quality Mesh Generator and
+    Delaunay Triangulator. http://www.cs.cmu.edu/~quake/triangle.html

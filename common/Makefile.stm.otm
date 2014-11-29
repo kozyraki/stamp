@@ -1,0 +1,55 @@
+# ==============================================================================
+#
+# Makefile.stm.otm
+#
+# ==============================================================================
+
+
+# ==============================================================================
+# Variables
+# ==============================================================================
+
+CFLAGS		+= -DSTM 
+CFLAGS		+= -I$(STM)
+#CFLAGS		+= -fdump-tree-gimple
+#CFLAGS		+= -fdump-tree-ompexp
+#CFLAGS   += -fdump-tree-final_cleanup
+#TODO: currently tm_function does not work with inlining
+CFLAGS      += -fno-inline-functions
+CFLAGS      += -D__x86
+CFLAGS      += -m32 -D__LP32
+CPPFLAGS    := $(CFLAGS)
+LDFLAGS     += -L$(STM) -m32
+LIBS        += -ltl2
+LIBS        += $(LIBOTM_STM)
+
+
+# ==============================================================================
+# Rules
+# ==============================================================================
+
+.PHONY: default
+default: $(PROG)
+
+.PHONY: clean
+clean:
+	$(RM) $(OBJS) $(PROG) $(OUTPUT)
+
+.PHONY: $(PROG)
+$(PROG): CFLAGS += $(CFLAGS_OTM)
+$(PROG): CFLAGS += -ftl2
+$(PROG): $(OBJS)
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $(PROG)
+
+.PHONY: $(PROG)-ltm
+$(PROG)-ltm: $(OBJS)
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $(PROG)
+
+include ../common/Makefile.common
+
+
+# ==============================================================================
+#
+# End of Makefile.stm.otm
+#
+# ==============================================================================

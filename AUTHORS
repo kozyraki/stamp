@@ -1,0 +1,36 @@
+STAMP is maintained by:
+
+    Chi Cao Minh (caominh@stanford.edu)
+
+The following people have contributed to STAMP:
+
+    Stanford University TCC Group (http://tcc.stanford.edu)
+    -----------------------------
+    Woongki Baek
+    Nathan Grasso Bronson
+    Chi Cao Minh
+    Brian D. Carlstrom
+    Jared Casper
+    JaeWoong Chung
+    Christos Kozyrakis
+    Kunle Olukotun
+    Martin Trautmann
+
+    Others
+    ------
+    bayes/sort:    Michael Ringgaard
+    kmeans:        Wei-keng Liao, Brendan McCane
+    lib/avltree:   Julienne Walker
+    lib/mt19937ar: Makoto Matsumoto, Takuji Nishimura
+    lib/rbtree:    Dave Dice, Ori Shalev, Nir Shavit
+    ssca2:         David A. Bader, Kamesh Madduri
+
+    Bug Fixes
+    ---------
+    Aleksandar Dragojevic
+    Pascal Felber
+    Ruben Titos
+
+    Compatibility Fixes
+    -------------------
+    Sigmund Cherem

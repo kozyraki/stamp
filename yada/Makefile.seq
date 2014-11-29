@@ -1,0 +1,35 @@
+# ==============================================================================
+#
+# Makefile.seq
+#
+# ==============================================================================
+
+
+include ../common/Defines.common.mk
+include ./Defines.common.mk
+include ../common/Makefile.seq
+
+.PHONY: test_coordinate
+test_coordinate: CFLAGS += -DTEST_COORDINATE
+test_coordinate:
+	$(CC) $(CFLAGS) coordinate.c -lm -o $@
+
+.PHONY: test_element
+test_element: CFLAGS += -DTEST_ELEMENT
+test_element: LIB_SRCS := $(LIB)/{heap,list,pair,avltree}.c
+test_element:
+	$(CC) $(CFLAGS) element.c coordinate.c $(LIB_SRCS) -lm -o $@
+
+.PHONY: test_mesh
+test_mesh: CFLAGS += -DTEST_MESH
+test_mesh: LIB_SRCS := $(LIB)/{heap,list,pair,avltree,queue,rbtree,random,mt19937ar}.c
+test_mesh:
+	$(CC) $(CFLAGS) mesh.c element.c coordinate.c $(LIB_SRCS) -lm -o $@
+
+
+# ==============================================================================
+#
+# Makefile.seq
+#
+# ==============================================================================
+

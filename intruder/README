@@ -1,0 +1,72 @@
+Introduction
+------------
+
+Signature-based network intrusion detection systems (NIDS) scan network packets
+for matches against a known set of intrusion signatures. This benchmark emulates
+Design~5 of the NIDS described by Haagdorens et al. in [2]. Network packets are
+processed in parallel and go through three phases: capture, reassembly, and
+detection. The main data structure in the capture phase is a simple FIFO queue,
+and the reassembly phase uses a dictionary (implemented by a self-balancing
+tree) that contains lists of packets that belong to the same session. When
+evaluating their five designs for a multithreaded NIDS, Haagdorens et al. state
+that the complexity of the reassembly phase caused them to use coarse-grain
+synchronization in Designs 4 and 5. Thus, even though these two designs
+attempted to exploit higher levels of concurrency, their coarse-grain
+synchronization resulted in worse performance.
+
+In the TM version included in STAMP, the capture and
+reassembly phases are each enclosed by transactions. Hence, the code
+for each phase is as simple as that with coarse-grain locks but hopefully
+achieves good performance through optimistic concurrency. When operating on
+these data structures, this benchmark has relatively short transactions. It also
+has moderate to high levels of contention depending on how often the
+reassembly phase rebalances its tree. Overall, since two of the three
+phases are spent in transactions, this benchmark has a moderate amount of total
+transactional execution time.
+
+When using this benchmark, please cite [1].
+
+
+Compiling and Running
+---------------------
+
+To build the application, simply run:
+
+    make -f <makefile>
+
+in the source directory. For example, for the sequential flavor, run:
+
+    make -f Makefile.seq
+
+By default, this produces an executable named "intruder", which can then be
+run in the following manner:
+
+    ./intruder -a <percent_of_attacks> \
+               -l <max_number_of_packets_per_stream> \
+               -n <total_number_of_streams> \
+               -s <random_seed> \
+               -t <number_of_threads>
+               
+On average, the total number of packets to analyze will be 0.5 * -l * -n.
+
+The following arguments are recommended for simulated runs:
+
+    -a10 -l4 -n2038 -s1
+
+For non-simulator runs, a larger input can be used:
+
+    -a10 -l128 -n262144 -s1
+
+
+References
+----------
+
+[1] C. Cao Minh, M. Trautmann, J. Chung, A. McDonald, N. Bronson, J. Casper,
+    C. Kozyrakis, and K. Olukotun. An Effective Hybrid Transactional Memory
+    System with Strong Isolation Guarantees. In Proceedings of the 34th Annual
+    International Symposium on Computer Architecture, 2007.
+
+[2] B. Haagdorens, T. Vermeiren, and M. Goossens. Improving the performance  of
+    signature-based network intrusion detection sensors by multi-threading. In 
+    WISA '04: Proceedings of the 5th International Workshop on Infomation
+    Security Applications, pages 188-203, 2004.

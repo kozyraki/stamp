@@ -1,0 +1,43 @@
+# ==============================================================================
+#
+# Makefile.seq
+#
+# ==============================================================================
+
+
+include ../common/Defines.common.mk
+include ./Defines.common.mk
+include ../common/Makefile.seq
+
+
+.PHONY: test_data
+test_data: CFLAGS += -DTEST_DATA -O0
+test_data: LIB_SRCS := $(LIB)/{bitmap,list,queue,random,mt19937ar,vector}.c
+test_data:
+	$(CC) $(CFLAGS) data.c sort.c net.c $(LIB_SRCS) -o $@
+
+.PHONY: test_net
+test_net: CFLAGS += -DTEST_NET -O0
+test_net: LIB_SRCS := $(LIB)/{list,queue,bitmap,random,mt19937ar,vector}.c
+test_net:
+	$(CC) $(CFLAGS) net.c $(LIB_SRCS) -o $@
+
+.PHONY: test_adtree
+test_adtree: CFLAGS += -DTEST_ADTREE -O0
+test_adtree: LIB_SRCS := $(LIB)/{bitmap,queue,list,random,mt19937ar,vector}.c
+test_adtree:
+	$(CC) $(CFLAGS) adtree.c data.c net.c sort.c $(LIB_SRCS) -o $@
+
+.PHONY: test_learner
+test_learner: CFLAGS += -DTEST_LEARNER -O0
+test_learner: LIB_SRCS := $(LIB)/{bitmap,list,queue,random,mt19937ar,thread,vector}.c -lm
+test_learner:
+	$(CC) $(CFLAGS) learner.c sort.c adtree.c data.c net.c $(LIB_SRCS) -o $@
+	
+
+# ==============================================================================
+#
+# Makefile.seq
+#
+# ==============================================================================
+

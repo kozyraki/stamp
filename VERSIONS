@@ -1,0 +1,96 @@
+0.9.10 (8 Sept 2008)
+    * Bug fixes:
+        - bayes
+            - Fixed score calculation for reverse operation
+            - Workaround for crash during clean up phase on 64-bit
+        - genome
+            - Fixing type for global_i in normal.c
+        - lib/bitmap
+            - Fixing type identifiers for constants (64-bit compatibility)
+        - lib/heap
+            - Adding missed annotation for heap_remove
+
+0.9.9 (18 June 2008)
+    * Added three more benchmarks:
+       - intruder: network intrusion detection
+       - ssca2: graph kernels
+       - yada: Delaunay mesh refinement
+    * Updated READMEs with new arguments and references
+    * bayes
+       - Fixed missing use of transactional list iterator
+    * genome
+        - Use iterator functions to traverse linked lists
+    * vacation
+        - Removed unnecessary read barrier in customer.c
+    * lib/rbtree
+        - Support pointers to arbitrary keys and values instead of assuming
+          longs
+
+0.9.8 (30 May 2008)
+    * Support for OpenTM (opentm.stanford.edu)
+
+0.9.7 (20 Mar 2008)
+    * bayes
+        - Fixes to reduce variation in run time
+        - New recommended arguments
+    * labyrinth
+        - Fixed bug where invalidated paths would not be discarded on abort
+        - Option to use early release
+    * vacation:
+        - Added prepopulation of customer table
+        - New recommended arguments
+    * lib:
+        - Adding annotation for early release to tm.h
+        - list
+          - Added missing barrier for list_free
+        - queue
+          - Fixed pointer annotations for queue
+          - Fixed bug for queue_push
+          - Added missing barrier for queue_free
+    * Miscellaneous cast fixes and changes to support more compilers
+
+0.9.6 (1 Dec 2007)
+    * Added two new benchmarks:
+      - bayes: learns structure of Bayesian network from observed data
+      - labyrinth: routes mazes via Lee's algorithm
+    * kmeans:
+      - Added medium size input
+    * lib:
+      - STM memory allocation/deallocation macros moved from tm.h to stm.h
+      - Added methods to bitmap and vector
+      - Fixed annotation in list
+
+0.9.5 (1 Oct 2007)
+    * Support for 32/64-bit
+    * Cleaned up annotations for transactional memory allocation
+      - Use with TL2-x86 0.9.1 or greater
+    * vacation
+      - Moving randomization outside transactions
+    * kmeans
+      - new random inputs that are clusterable
+      - add file input generation script
+    * lib
+      - simplified tm.h interface
+      - threading-related code moved from tm.h to thread.{c,h}
+      - added queue.{c,h}
+      - small optimizations for hashtable.c
+    * Several small miscellaneous changes
+
+0.9.4 (26 June 2007)
+    * Fix compilation issues
+    * Bug fixes from Ruben Titos:
+        - vacation: fixed ID initialization
+        - lib/memory: fixed alignment
+
+0.9.3 (19 June 2007)
+    * Maintenance update (delaunay removed)
+
+0.9.2 (25 May 2007)
+    * Removed unnecessary transaction in kmeans
+    * Revised non-simulator runtime options in READMEs
+
+0.9.1 (21 May 2007)
+    * Fixed unpaired TM_BEGINs
+
+0.9.0 (11 May 2007)
+    * Initial release

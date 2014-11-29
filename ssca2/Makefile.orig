@@ -1,0 +1,8 @@
+EXECS = RUN_graphAnalysis
+
+SIMPLE_DIR = ../simple-4.4H
+
+OPT        = -O$(O_LEVEL)
+OPT        = -g
+
+include $(SIMPLE_DIR)/Makefile.smp.mk

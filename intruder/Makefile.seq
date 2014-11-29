@@ -1,0 +1,47 @@
+# ==============================================================================
+#
+# Makefile.seq
+#
+# ==============================================================================
+
+
+include ../common/Defines.common.mk
+include ./Defines.common.mk
+include ../common/Makefile.seq
+
+.PHONY: test_decoder
+test_decoder: CFLAGS += -DTEST_DECODER -O0
+test_decoder: LIB_SRCS := $(LIB)/{list,mt19937ar,queue,random,rbtree}.c
+test_decoder:
+	$(CC) $(CFLAGS) decoder.c packet.c $(LIB_SRCS) -o $@
+
+.PHONY: test_detector
+test_detector: CFLAGS += -DTEST_DETECTOR -O0
+test_detector: LIB_SRCS := $(LIB)/vector.c
+test_detector:
+	$(CC) $(CFLAGS) detector.c dictionary.c preprocessor.c $(LIB_SRCS) -o $@
+
+.PHONY: test_dictionary
+test_dictionary: CFLAGS += -DTEST_DICTIONARY -O0
+test_dictionary: LIB_SRCS := $(LIB)/vector.c
+test_dictionary:
+	$(CC) $(CFLAGS) dictionary.c $(LIB_SRCS) -o $@
+
+.PHONY: test_preprocessor
+test_preprocessor: CFLAGS += -DTEST_PREPROCESSOR -O0
+test_preprocessor:
+	$(CC) $(CFLAGS) preprocessor.c -o $@
+
+.PHONY: test_stream
+test_stream: CFLAGS += -DTEST_STREAM -O0
+test_stream: LIB_SRCS := $(LIB)/{mt19937ar,pair,queue,random,rbtree,vector}.c
+test_stream:
+	$(CC) $(CFLAGS) stream.c detector.c dictionary.c preprocessor.c $(LIB_SRCS) -o $@
+	
+
+# ==============================================================================
+#
+# Makefile.seq
+#
+# ==============================================================================
+

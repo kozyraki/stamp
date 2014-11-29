@@ -1,0 +1,91 @@
+Introduction
+------------
+
+A Bayesian network (or a belief network) is a way of representing probability
+distributions for a set of  variables in a concise and comprehensible graphical
+manner. Conceptually, a Bayesian network is represented as a directed acyclic
+graph, where each node represents a variable and each edge represents a
+conditional dependence. By recording the conditional independences among
+variables (the lack of an edge between two variables implies conditional
+independence), a Bayesian network is able to compactly represent all of the
+probability distributions.
+
+Bayesian networks have a variety of applications and are used for modeling
+knowledge in domains such  as medicine, image processing, and decision support
+systems. For example, a Bayesian network can be used to calculate the
+probability of a patient having a specific disease, given the absence or
+presence of certain symptoms.
+
+This application implements an algorithm for learning Bayesian networks, which
+is an important part of machine learning. Typically, neither the probability
+distributions nor the conditional dependences among them are known or solvable
+for a human; thus Bayesian networks are often learned from observed data.
+The particular algorithm implements a hill-climbing strategy that uses both
+local and global search, similar to the technique described in [2]. For
+efficient probability distribution estimations, the adtree data structure
+from [3] is used.
+
+When using this benchmark, please cite [1].
+
+
+Compiling and Running
+---------------------
+
+To build the application, simply run:
+
+    make -f <makefile>
+
+in the source directory. For example, for the sequential flavor, run:
+
+    make -f Makefile.seq
+
+By default, this produces an executable named "bayes", which can then be
+run in the following manner:
+
+    ./bayes -e <max_edges_learned_per_variable> \
+            -i <edge_insert_penalty> \
+            -n <max_number_of_parents> \
+            -p <percent_chance_of_parent> \
+            -q <operation_quality_factor> \
+            -r <number_of_records> \
+            -s <random_seed> \
+            -t <number_of_threads> \
+            -v <number_of_variables>
+
+The data to learn from is randomly generated from a randomly generated Bayesian
+network with the following properties:
+
+    1) Consists of -v variables
+    2) Each variable has at most -n parents
+    3) The number of parents per variable will be, on average, -n * -p
+
+From this "master" Bayesian network, -r random records are generated and used
+as the input for the structure learning algorithm.
+
+The following arguments are recommended for simulated runs:
+
+    -v32 -r1024 -n2 -p20 -s0 -i2 -e2
+
+For non-simulator runs, a larger Bayesian network can be learned:
+
+    -v32 -r4096 -n10 -p40 -i2 -e8 -s1
+
+For multithreaded runs, the runing time can vary depending on the insertion
+order of edges.
+
+
+References
+----------
+
+[1] C. Cao Minh, J. Chung, C. Kozyrakis, and K. Olukotun. STAMP: Stanford 
+    Transactional Applications for Multi-processing. In IISWC '08: Proceedings
+    of The IEEE International Symposium on Workload Characterization,
+    September 2008. 
+
+[2] D. M. Chickering, D. Heckerman, and C. Meek. A Bayesian approach to learning
+    Bayesian networks with local structure. In Proceedings of Thirteenth
+    Conference on Uncertainty in Artificial Intelligence, 1997.
+
+[3] A. Moore and M.-S. Lee. Cached sufficient statistics for efficient machine
+    learning with large datasets. Journal of Artificial Intelligence Research 8,
+    1998.
