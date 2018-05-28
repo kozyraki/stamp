@@ -37,7 +37,7 @@ This directory contains the following items:
 
     AUTHORS ----- A list of people who have contributed to STAMP
     LICENSE ----- BSD-style license; if you use STAMP, please let us know
-    README ------ This file
+    README.md ------ This file
     VERSIONS ---- Revision history
     bayes/ ------ Bayesian network structure learning benchmark  
     common/ ----- Common Makefile variables and rules
@@ -78,6 +78,6 @@ ___References___
     System with Strong Isolation Guarantees. In Proceedings of the 34th Annual
     International Symposium on Computer Architecture, 2007.
 
-[2] D. Dice, O. Shalev, and N. Shavit. Transactional Locking II. In
+[3] D. Dice, O. Shalev, and N. Shavit. Transactional Locking II. In
     Proceedings of the 20th International Symposium on Distributed Computing
     (DISC), 2006.
