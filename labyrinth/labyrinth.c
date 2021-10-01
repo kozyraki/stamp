@@ -154,6 +154,8 @@ parseArgs (long argc, char* const argv[])
         switch (opt) {
             case 'b':
             case 't':
+                global_params[PARAM_THREAD] = atol(optarg);
+                break;
             case 'x':
             case 'y':
             case 'z':

@@ -33,6 +33,7 @@ By default, this produces an executable named "labyrinth", which can then be
 run in the following manner:
 
     ./labyrinth -i <input_file>
+                -t <number_of_thread>
 
 The following input file is recommended for simulated runs:
 
