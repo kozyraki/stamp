@@ -32,7 +32,8 @@ run in the following manner:
                -q <%_of_relations_queried> \
                -r <number_possible_relations> \
                -u <%_of_user_tasks> \
-               -t <number_of_tasks>
+               -t <number_of_tasks> \
+               -c <number_of_thread/client>
 
 The following values are recommended for simulated runs:
 
